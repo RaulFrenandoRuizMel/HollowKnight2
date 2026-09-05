@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class ActivarDialogo : MonoBehaviour
 {
+    [SerializeField] AudioClip[] Audios;
 
     [SerializeField] GameObject letreroHablar;
     PlayerInput playerInput;
@@ -55,7 +56,7 @@ public class ActivarDialogo : MonoBehaviour
             if (playerInput.actions["Move"].ReadValue<Vector2>().y > 0.5f)
             {
                 scriptJugador.PoderMoverse = false;
-                sistemaDialogos.MostrarDialogos(dialogos[dialogoActual], nombre, this);
+                sistemaDialogos.MostrarDialogos(dialogos[dialogoActual], nombre, this, Audios[dialogoActual]);
                 leyendoDialogo = true;
             }
         }
@@ -65,7 +66,7 @@ public class ActivarDialogo : MonoBehaviour
         if (dialogoActual < dialogos.Length - 1)
         {
             dialogoActual++;
-            sistemaDialogos.MostrarDialogos(dialogos[dialogoActual], nombre, this);
+            sistemaDialogos.MostrarDialogos(dialogos[dialogoActual], nombre, this, Audios[dialogoActual]);
         }
         else
         {

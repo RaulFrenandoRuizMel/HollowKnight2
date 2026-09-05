@@ -20,6 +20,7 @@ public class Jugador : MonoBehaviour
     [SerializeField] GameObject prefabCreacionDano;
     [SerializeField] Transform CreacionDaño;
     [SerializeField] JugadorDestello destello;
+    [SerializeField] GameObject prefabEspiritu;
 
     // ------------ VIDA
     int vida;
@@ -28,6 +29,8 @@ public class Jugador : MonoBehaviour
     JugadorVibracion jugadorVibracion;
     public bool PoderMoverse;
 
+    float contadoVengativo;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -55,6 +58,8 @@ public class Jugador : MonoBehaviour
         jugadorVibracion = this.GetComponent<JugadorVibracion>();
         
         PoderMoverse = true;
+
+        contadoVengativo = 0;
     }
 
     // Update is called once per frame
@@ -154,7 +159,7 @@ public class Jugador : MonoBehaviour
 
         //--------------------- DASH -----------------------//
         cooldawnDash -= Time.deltaTime;
-        if (playerInput.actions["Sprint"].WasPressedThisFrame())
+        if (playerInput.actions["Sprint"].WasPressedThisFrame() && PoderMoverse)
         {
             animator.Play("Jugador_dash");
             if (cooldawnDash <= 0)
@@ -175,7 +180,7 @@ public class Jugador : MonoBehaviour
         contadorDash -= Time.deltaTime;
 
         //--------------Ataque---------------//
-        if (playerInput.actions["Attack"].WasPressedThisFrame())
+        if (playerInput.actions["Attack"].WasPressedThisFrame() && PoderMoverse)
         {
             if(contadorAtaque<=0)
             { 
@@ -207,6 +212,19 @@ public class Jugador : MonoBehaviour
             {
                 DanoMovX = 0;
             }
+        }
+
+        if (playerInput.actions["hechizo"].WasPressedThisFrame())
+        {
+            contadoVengativo = 0.7f;
+            velocidad.y = 0;
+            Instantiate(prefabEspiritu, this.transform.position + Vector3.up * 0.5f, Quaternion.identity);
+        }
+
+        if (contadoVengativo > 0)
+        {
+            contadoVengativo = 0.7f;
+            contadoVengativo -= Time.deltaTime;
         }
 
         characterController.Move(velocidad * Time.deltaTime);

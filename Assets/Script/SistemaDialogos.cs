@@ -22,6 +22,7 @@ public class SistemaDialogos : MonoBehaviour
 
     ActivarDialogo _activarDialogo;
 
+    AudioSource audioSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,6 +37,8 @@ public class SistemaDialogos : MonoBehaviour
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
 
         _activarDialogo = null;
+
+        audioSource = this.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -49,7 +52,7 @@ public class SistemaDialogos : MonoBehaviour
                 contador += Time.deltaTime;
                 if(contador > tiempoLetra)
                 {
-                    if (i < texto.Length - 1)
+                    if (i < texto.Length)
                     {
                         texto_dialogo.text += texto[i].ToString();
                         i++;
@@ -82,8 +85,9 @@ public class SistemaDialogos : MonoBehaviour
         }
     }
 
-    public void MostrarDialogos(string dialogo, string nombre, ActivarDialogo activarDialogo)
+    public void MostrarDialogos(string dialogo, string nombre, ActivarDialogo activarDialogo, AudioClip audio)
     {
+        
         if (EstadoDialogo == 0)
         {
             NombreNPC.text = nombre;
@@ -93,6 +97,9 @@ public class SistemaDialogos : MonoBehaviour
             texto_dialogo.text = "";
             EstadoDialogo = 1;
             _activarDialogo = activarDialogo;
+
+            audioSource.clip = audio;
+            audioSource.Play();
         }
     }
 }
