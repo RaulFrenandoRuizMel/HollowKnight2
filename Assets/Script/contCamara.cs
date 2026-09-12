@@ -53,15 +53,15 @@ public class contCamara : MonoBehaviour
 
         if(JugadorRotacionY > 90)
         {
-            camara.localPosition = new Vector3(-1,0,-10);
+            camara.localPosition = Vector3.MoveTowards(camara.localPosition, new Vector3(-1, 0, -10), 3* Time.deltaTime);
         }
         else
         {
-            camara.localPosition = new Vector3(1, 0, -10);
+            camara.localPosition = Vector3.MoveTowards(camara.localPosition, new Vector3(1, 0, -10), 3 * Time.deltaTime);
         }
 
         // limites escenario
-        if (posicion.x < limiteIzquierdo.x)
+        /*if (posicion.x < limiteIzquierdo.x)
         {
             posicion.x = limiteIzquierdo.x;
         }
@@ -79,7 +79,7 @@ public class contCamara : MonoBehaviour
         if (posicion.y > limiteSuperior.y)
         {
             posicion.y = limiteSuperior.y;
-        }
+        }*/
         this.transform.position = posicion;
     }
 }

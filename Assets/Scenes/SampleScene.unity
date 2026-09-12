@@ -3802,7 +3802,7 @@ GameObject:
   - component: {fileID: 1777339558}
   - component: {fileID: 1777339557}
   - component: {fileID: 1777339556}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ActivadorDialogo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
