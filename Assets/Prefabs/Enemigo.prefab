@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 1792645759712114648}
   - component: {fileID: 4741485166398553400}
   m_Layer: 2
-  m_Name: Cube (7)
+  m_Name: "HitboxDa\xF1o"
   m_TagString: Dano
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
