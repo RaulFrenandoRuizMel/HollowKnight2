@@ -1203,6 +1203,14 @@ PrefabInstance:
       propertyPath: NombreEscena
       value: Cuarto 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3293609332135745473, guid: 029c03f15b2ba794e9c069e886d9a5cb, type: 3}
+      propertyPath: posicionInicio.x
+      value: -9.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293609332135745473, guid: 029c03f15b2ba794e9c069e886d9a5cb, type: 3}
+      propertyPath: posicionInicio.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5921589643276957890, guid: 029c03f15b2ba794e9c069e886d9a5cb, type: 3}
       propertyPath: m_Name
       value: TriggerEscena

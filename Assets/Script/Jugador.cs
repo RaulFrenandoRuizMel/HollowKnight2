@@ -38,10 +38,13 @@ public class Jugador : MonoBehaviour
     int estadoPared;
     float velocidadParedX;
     bool tocarParedDerecha;
-    
+
+   
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
         characterController = this.GetComponent<CharacterController>();
         playerInput = this.GetComponent<PlayerInput>();
         velocidad = Vector3.zero;
@@ -73,6 +76,11 @@ public class Jugador : MonoBehaviour
         PoderMoverse = true;
 
         contadoVengativo = 0;
+
+        characterController.enabled = false;
+        this.transform.position = triggerTransicion.posicionTransicion;
+        characterController.enabled = true;
+
     }
 
     // Update is called once per frame
@@ -423,6 +431,7 @@ public class Jugador : MonoBehaviour
                 TransicionEscenas transicionEscenas = GameObject.Find("PantallaNegra").GetComponent<TransicionEscenas>();
 
                 triggerTransicion triggerTransicion = other.gameObject.GetComponent<triggerTransicion>();
+                triggerTransicion.posicionTransicion = triggerTransicion.posicionInicio;
 
                 transicionEscenas.transicionarEscena(triggerTransicion.NombreEscena);
                 break;
