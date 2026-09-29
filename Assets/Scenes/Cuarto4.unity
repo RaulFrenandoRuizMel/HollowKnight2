@@ -467,6 +467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::jefe1
   animator: {fileID: 934307747}
   prefabPincho: {fileID: 7472767172749933880, guid: 2e14037c0ab9def4493ca037a869c376, type: 3}
+  prefabExplosioonTeletransportacion: {fileID: 5785586477367050409, guid: 02864535589848447b6bed330bbd160b, type: 3}
 --- !u!1 &548136146
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,7 +961,7 @@ GameObject:
   - component: {fileID: 966884546}
   - component: {fileID: 966884545}
   - component: {fileID: 966884549}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Enemigo
   m_Icon: {fileID: 0}
