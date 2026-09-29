@@ -25,6 +25,8 @@ public class jefe1 : MonoBehaviour
 
     float velocidad_x;
 
+    Transform jugador;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -46,6 +48,8 @@ public class jefe1 : MonoBehaviour
         fase = 1;
 
         velocidad_x = 0;
+
+        jugador = GameObject.FindGameObjectsWithTag("Player").transform;
     }
 
     // Update is called once per frame
@@ -132,7 +136,10 @@ public class jefe1 : MonoBehaviour
 
     public void RecibirDano()
     {
-        velocidad_x = 20;
+        if(jugador.rotation.eulerAngles.y < 90)
+        {
+            velocidad_x = 20;
+        }
         VIDA--;
         Debug.Log(VIDA);
         if(VIDA < 20)
