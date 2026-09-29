@@ -18,6 +18,13 @@ public class jefe1 : MonoBehaviour
 
     int VIDA;
     int fase;
+
+    float aleatoriedadPinchos;
+
+    public GameObject prefabExplosioonTeletransportacion;
+
+    float velocidad_x;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -37,6 +44,8 @@ public class jefe1 : MonoBehaviour
 
         VIDA = 30;
         fase = 1;
+
+        velocidad_x = 0;
     }
 
     // Update is called once per frame
@@ -55,6 +64,8 @@ public class jefe1 : MonoBehaviour
 
                 direccionOndas.x = -1 + Mathf.RoundToInt(Random.value) * 2;
                 direccionOndas.y = -1 + Mathf.RoundToInt(Random.value) * 2;
+
+                Instantiate(prefabExplosioonTeletransportacion, this.transform.position, Quaternion.identity);
 
                 this.transform.position = new Vector3(
                     posicionOriginal.x + Random.Range(3, 8) * direccion,
@@ -85,9 +96,12 @@ public class jefe1 : MonoBehaviour
                 estadoAtaque = 0;
             }
         }
+
+        this.transform.Translate(Vector3.right * velocidad_x * Time.deltaTime);
     }
     public void Atacar()
     {
+        aleatoriedadPinchos = Random.value * 360;
         switch (fase)
         {
             case 1:
@@ -108,15 +122,17 @@ public class jefe1 : MonoBehaviour
 
     void crearPinchos()
     {
-        float aleatoriedad = Random.value * 360;
         for (int i = 0; i < 8; i++)
         {
-            Instantiate(prefabPincho, this.transform.position, Quaternion.Euler(0, 0, i * 45 + aleatoriedad));
+            Instantiate(prefabPincho, this.transform.position, Quaternion.Euler(0, 0, i * 45 + aleatoriedadPinchos));
         }
+        aleatoriedadPinchos += 22.5f;
+
     }
 
     public void RecibirDano()
     {
+        velocidad_x = 20;
         VIDA--;
         Debug.Log(VIDA);
         if(VIDA < 20)
