@@ -11,10 +11,13 @@ public class jefe1 : MonoBehaviour
     float velocidadOndeo;
     Vector2 direccionOndas;
 
-     [SerializeField]Animator animator;
-     [SerializeField]GameObject prefabPincho;
+    [SerializeField] Animator animator;
+    [SerializeField] GameObject prefabPincho;
 
     int estadoAtaque;
+
+    int VIDA;
+    int fase;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,12 +34,15 @@ public class jefe1 : MonoBehaviour
 
         estadoAtaque = 0;
         Debug.Log(direccionOndas.x);
+
+        VIDA = 30;
+        fase = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(estadoAtaque == 0)
+        if (estadoAtaque == 0)
         {
             anguloOndas += Time.deltaTime * 200;
             this.transform.Translate(Vector3.up * Mathf.Sin(anguloOndas * Mathf.Deg2Rad) * Time.deltaTime * velocidadOndeo * direccionOndas.y);
@@ -73,7 +79,7 @@ public class jefe1 : MonoBehaviour
         else
         {
             contadorAtaque += Time.deltaTime;
-            if(contadorAtaque > 1)
+            if (contadorAtaque > 1)
             {
                 contadorAtaque = 0;
                 estadoAtaque = 0;
@@ -82,9 +88,44 @@ public class jefe1 : MonoBehaviour
     }
     public void Atacar()
     {
+        switch (fase)
+        {
+            case 1:
+                crearPinchos();
+                break;
+            case 2:
+                crearPinchos();
+                Invoke("crearPinchos", 0.5f);
+                break;
+                case 3:
+                crearPinchos();
+                Invoke("crearPinchos", 0.5f);
+                Invoke("crearPinchos", 1);
+                break;
+        }
+
+    }
+
+    void crearPinchos()
+    {
+        float aleatoriedad = Random.value * 360;
         for (int i = 0; i < 8; i++)
         {
-            Instantiate(prefabPincho, this.transform.position, Quaternion.Euler(0, 0, i * 45));
+            Instantiate(prefabPincho, this.transform.position, Quaternion.Euler(0, 0, i * 45 + aleatoriedad));
+        }
+    }
+
+    public void RecibirDano()
+    {
+        VIDA--;
+        Debug.Log(VIDA);
+        if(VIDA < 20)
+        {
+            fase = 2;
+        }
+        if (VIDA < 10)
+        {
+            fase = 3;
         }
     }
 }
